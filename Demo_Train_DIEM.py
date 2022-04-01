@@ -24,6 +24,7 @@ def train(method_name = 'strnn', batch_size=4, epochs=20, cnn_type='vgg16', use_
     if not os.path.exists(tmdir):
         os.makedirs(tmdir)
 
+    shape_r, shape_c, shape_r_out, shape_c_out = iosize
     #################################################################
     # Build the model
     #################################################################
@@ -40,9 +41,8 @@ def train(method_name = 'strnn', batch_size=4, epochs=20, cnn_type='vgg16', use_
     # for p in model.feat_of.parameters():
     #     p.requires_grad = False
 
-    shape_r, shape_c, shape_r_out, shape_c_out = iosize
-
     criterion = loss_fu
+    # When fine-tuning the model, it is recommended to use a smaller learning rate, like lr=1e-5, weight_decay=0.00001
     optimizer = torch.optim.Adam([p for p in model.parameters() if p.requires_grad == True], lr=1e-4, betas=(0.9, 0.999), weight_decay=0.00005)
 
     #################################################################

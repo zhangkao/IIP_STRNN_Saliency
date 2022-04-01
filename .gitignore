@@ -1,5 +1,4 @@
 weights/temp_models/
-weights/*
 weights/*.pytorch
 weights/*.pth
 *.pyc

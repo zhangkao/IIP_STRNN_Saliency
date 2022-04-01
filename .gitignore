@@ -6,3 +6,4 @@ weights/*.pth
 *.h5
 .idea
 __pycache__
+*.pkl

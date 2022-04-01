@@ -34,20 +34,10 @@ def train(method_name = 'strnn', batch_size=4, epochs=20, cnn_type='vgg16', use_
                         pre_model_path=pre_model_path)
     model = model.cuda()
 
-    # if os.path.exists(pre_model_path):
-    #     print("Load pre-trained STRNN weights")
-    #     model.load_state_dict(torch.load(pre_model_path).state_dict())
-
-    for p in model.feat_sm.parameters():
-        p.requires_grad = False
-    for p in model.feat_of.parameters():
-        p.requires_grad = False
-
     shape_r, shape_c, shape_r_out, shape_c_out = iosize
 
     criterion = loss_fu
-    # optimizer = torch.optim.Adam([p for p in model.parameters() if p.requires_grad == True], lr=1e-4, betas=(0.9, 0.999), weight_decay=0.00005)
-    optimizer = torch.optim.Adam([p for p in model.parameters() if p.requires_grad == True], lr=1e-5, betas=(0.9, 0.999), weight_decay=0.00001)
+    optimizer = torch.optim.Adam([p for p in model.parameters() if p.requires_grad == True], lr=1e-4, betas=(0.9, 0.999), weight_decay=0.00005)
 
     #################################################################
     # Train the model
@@ -238,8 +228,8 @@ def test(input_path, output_path, method_name, saveFrames=float('inf'), use_cb=F
 IS_EARLY_STOP = True
 IS_BEST_ONLY = False
 Max_patience = 5
-Train_Max_TrainFrame = 300              #float('inf') for DIEM; 300 for DHF1K
-Val_Max_TrainFrame = 300                # 1000 for DIEM; 300 for DHF1K
+Train_Max_TrainFrame = float('inf')              #float('inf') for DIEM; 300 for DHF1K
+Val_Max_TrainFrame = 1000                # 1000 for DIEM; 300 for DHF1K
 
 ################################################################
 # DATASET PARAMETERS

@@ -97,7 +97,7 @@ And it is easy to change the output format in our code.
 * You can evaluate the performance based on the "EvalScores Tools".
 
 
-**Results**: [ALL](https://whueducn-my.sharepoint.com/:f:/g/personal/zhangkao_whu_edu_cn/Es2k8IqwSOBMs0jpKxDG8V4Bx49k3IP_r_B6ceRqgU16FQ?e=lzmwT3) (8.9G);
+**Results**: [ALL](https://whueducn-my.sharepoint.com/:f:/g/personal/zhangkao_whu_edu_cn/Es2k8IqwSOBMs0jpKxDG8V4Bx49k3IP_r_B6ceRqgU16FQ?e=lzmwT3) (5.1G);
 [DIEM20](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/EeLxb5aqHg9DobSBDi2jizYBNw02Y-W-8eaUIPIkIvCcwg?e=7aW359) (261M),
 [CITIUS-R](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/Eaak96t4PH1KvGWRDHmwft8By9yQTL-TgUt1DyZ7GuJP4w?e=O11DeY) (54M), 
 [LEDOV41](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/EUcrQQuut2FIuLDwnHv4K9MB0Ut-_NFWlHVaayCoeiKnDA?e=cRtyZv) (839M), 
@@ -107,16 +107,6 @@ And it is easy to change the output format in our code.
 
 
 **Results for DHF1K**: 
-
-[comment]: <> (* **strnn_res_dhf1k_test** : )
-
-[comment]: <> ([Baidu Drive]&#40;https://pan.baidu.com/s/1XGs25nfvBvElMXA5p9kY8g&#41; &#40;8hd3&#41;; )
-
-[comment]: <> ([Google Drive]&#40;&#41;. )
-
-[comment]: <> (&#40;3.94G&#41; <br />)
-
-[comment]: <> (The results are obtained by the model that was trained based on the DIEM dataset without using any data from the DHF1K.)
 
 * **strnn_res_dhf1k_test_rt** : 
 [OneDrive](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/EWb98WMO7bZGt-bq9AOnkM4BEWsC7_cm4gEuYDCrJnk22Q?e=J7havj); 

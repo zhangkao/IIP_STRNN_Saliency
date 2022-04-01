@@ -3,7 +3,7 @@ function Vid_MeanScore(ResDir,MaxVideoNums)
         MaxVideoNums = Inf;      
     end   
     if nargin < 1
-        ResDir = fullfile('E:\DataSet\DIEM20\Results\Results_Oth\');
+        ResDir = fullfile('E:\DataSet\DIEM20\Results\Results_STRNN\');
     end     
 
     scoreDir = [ResDir 'Scores' filesep];

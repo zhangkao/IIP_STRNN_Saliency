@@ -4,5 +4,5 @@ weights/*.pth
 *.pyc
 *.xml
 *.h5
-*/.idea/
+.idea
 __pycache__

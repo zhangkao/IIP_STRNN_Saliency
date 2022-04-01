@@ -56,8 +56,8 @@ def loss_fu_dy(y_pred,y_true):
 
 def metric_kl(y_pred,y_true):
     y_true = y_true[:, 0:1, :, :]
-    y_true /= (get_sum(y_true) + EPS)
-    y_pred /= (get_sum(y_pred) + EPS)
+    y_true = y_true / (get_sum(y_true) + EPS)
+    y_pred = y_pred / (get_sum(y_pred) + EPS)
 
     return torch.mean(torch.sum(y_true * torch.log((y_true / (y_pred + EPS)) + EPS), (2,3)),0)
 
@@ -98,8 +98,8 @@ def metric_sim(y_pred, y_true):
     y_true = (y_true - get_min(y_true)) / (get_max(y_true) - get_min(y_true) + EPS)
     y_pred = (y_pred - get_min(y_pred)) / (get_max(y_pred) - get_min(y_pred) + EPS)
 
-    y_true /= (get_sum(y_true) + EPS)
-    y_pred /= (get_sum(y_pred) + EPS)
+    y_true = y_true / (get_sum(y_true) + EPS)
+    y_pred = y_pred / (get_sum(y_pred) + EPS)
 
     diff = torch.min(y_true,y_pred)
     score = torch.sum(diff,dim=(2,3))
@@ -109,7 +109,7 @@ def metric_sim(y_pred, y_true):
 def loss_ml(y_pred, y_true):
     y_true = y_true[:, 0:1, :, :]
 
-    y_pred /= (get_max(y_pred) + EPS)
+    y_pred = y_pred / (get_max(y_pred) + EPS)
     return torch.mean((y_pred - y_true)*(y_pred - y_true) / (1 - y_true + 0.1))
 
 
@@ -171,13 +171,13 @@ class L2Loss(nn.Module):
         return [lossvalue, epevalue]
 
 class MultiScale(nn.Module):
-    def __init__(self, args, startScale = 4, numScales = 5, l_weight= 0.32, norm= 'L1'):
+    def __init__(self, startScale = 4, numScales = 5, l_weight= 0.32, norm= 'L1'):
         super(MultiScale,self).__init__()
 
         self.startScale = startScale
         self.numScales = numScales
-        self.loss_weights = torch.FloatTensor([(l_weight / 2 ** scale) for scale in range(self.numScales)])
-        self.args = args
+        # self.loss_weights = torch.FloatTensor([(l_weight / 2 ** scale) for scale in range(self.numScales)])
+        self.loss_weights = torch.FloatTensor([0.32,0.08,0.02,0.01,0.005]).cuda()
         self.l_type = norm
         self.div_flow = 0.05
         assert(len(self.loss_weights) == self.numScales)
@@ -195,8 +195,9 @@ class MultiScale(nn.Module):
         epevalue = 0
 
         if type(output) is tuple:
-            target = self.div_flow * target
+            # target = self.div_flow * target
             for i, output_ in enumerate(output):
+                output_ = output_ / self.div_flow
                 target_ = self.multiScales[i](target)
                 epevalue += self.loss_weights[i]*EPE(output_, target_)
                 lossvalue += self.loss_weights[i]*self.loss(output_, target_)
@@ -204,69 +205,4 @@ class MultiScale(nn.Module):
         else:
             epevalue += EPE(output, target)
             lossvalue += self.loss(output, target)
-            return  [lossvalue, epevalue]
-
-
-
-
-
-
-
-# if __name__ == '__main__':
-#
-#
-#     # shape_r = 480
-#     # shape_c = 640
-#     # shape_r_out = 480
-#     shape_c_out = 640
-#
-#     import cv2, os, scipy.io
-#     import numpy as np
-#     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-#
-#     def read_maps(paths):
-#         ims = np.zeros((len(paths), 1, shape_r, shape_c), dtype=np.float)
-#
-#         for i, path in enumerate(paths):
-#             image = cv2.imread(path, -1)
-#             # image = cv2.resize(image, (shape_c, shape_r))
-#             ims[i, 0, :, :] = image
-#
-#         return ims
-#
-#     def read_fixmaps(paths):
-#         ims = np.zeros((len(paths), 1, shape_r, shape_c), dtype=np.float)
-#
-#         for i, path in enumerate(paths):
-#             fix_map = scipy.io.loadmat(path)["I"]
-#             # fix_map = cv2.resize(fix_map, (shape_c, shape_r))
-#             ims[i, 0, :, :] = fix_map
-#
-#         return ims
-#
-#     data_dir = 'E:/IIP_Saliency_Dataset/DataSet/salicon-15/val-16/'
-#     maps_train_path = data_dir + 'maps/'
-#     fixs_train_path = data_dir + 'fixations/maps/'
-#     sals_train_path = data_dir + 'salmaps/'
-#
-#     maps_path = [maps_train_path + f for f in os.listdir(maps_train_path) if f.endswith('.png')]
-#     fixs_path = [fixs_train_path + f for f in os.listdir(fixs_train_path) if f.endswith('.mat')]
-#     sals_path = [sals_train_path + f for f in os.listdir(sals_train_path) if f.endswith('.png')]
-#
-#     maps_path.sort()
-#     fixs_path.sort()
-#     sals_path.sort()
-#
-#     maps = read_maps(maps_path)
-#     sals = read_maps(sals_path)
-#     fixs = read_fixmaps(fixs_path)
-#
-#     y_pred = torch.tensor(sals).float()
-#     y_true =  torch.tensor(np.concatenate((maps,fixs),axis=1)).float()
-#
-#     kl_value  = metric_kl(y_pred,y_true)
-#     cc_value  = metric_cc(y_pred, y_true)
-#     nss_value = metric_nss(y_pred, y_true)
-#     sim_value = metric_sim(y_pred, y_true)
-#
-#     loss_v1 = loss_fu(y_pred,y_true)
+            return [lossvalue, epevalue]

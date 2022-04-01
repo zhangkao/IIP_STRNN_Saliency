@@ -272,10 +272,15 @@ def cupy_kernel(strFunction, objectVariables):
 	return strKernel
 # end
 
-# @cupy.memoize(for_each_device=True)
-@cupy.util.memoize(for_each_device=True)
-def cupy_launch(strFunction, strKernel):
-	return cupy.cuda.compile_with_cache(strKernel).get_function(strFunction)
+
+if int(str('').join(cupy.__version__.split('.')[0:3])) >= 800:
+	@cupy.memoize(for_each_device=True)
+	def cupy_launch(strFunction, strKernel):
+		return cupy.cuda.compile_with_cache(strKernel).get_function(strFunction)
+else:
+	@cupy.util.memoize(for_each_device=True)
+	def cupy_launch(strFunction, strKernel):
+		return cupy.cuda.compile_with_cache(strKernel).get_function(strFunction)
 # end
 
 class _FunctionCorrelation(torch.autograd.Function):

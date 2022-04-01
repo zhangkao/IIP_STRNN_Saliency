@@ -103,7 +103,7 @@ if __name__ == '__main__':
     iosize = [480, 640, 60, 80]
 
     if os.name == 'nt':
-        dataDir = 'D:/DataSet/'
+        dataDir = 'E:/DataSet/'
     else:
         dataDir = '/home/kao/kao-ssd/DataSet'
 

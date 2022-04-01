@@ -1,0 +1,9 @@
+weights/temp_models/
+weights/*
+weights/*.pytorch
+weights/*.pth
+*.pyc
+*.xml
+*.h5
+*/.idea/
+__pycache__

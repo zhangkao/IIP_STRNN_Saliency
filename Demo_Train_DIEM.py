@@ -34,6 +34,12 @@ def train(method_name = 'strnn', batch_size=4, epochs=20, cnn_type='vgg16', use_
                         pre_model_path=pre_model_path)
     model = model.cuda()
 
+    # When fine-tuning the model, you can fix some parameters to improve the training speed
+    # for p in model.feat_sm.parameters():
+    #     p.requires_grad = False
+    # for p in model.feat_of.parameters():
+    #     p.requires_grad = False
+
     shape_r, shape_c, shape_r_out, shape_c_out = iosize
 
     criterion = loss_fu
@@ -228,7 +234,7 @@ def test(input_path, output_path, method_name, saveFrames=float('inf'), use_cb=F
 IS_EARLY_STOP = True
 IS_BEST_ONLY = False
 Max_patience = 5
-Train_Max_TrainFrame = float('inf')              #float('inf') for DIEM; 300 for DHF1K
+Train_Max_TrainFrame = float('inf')      #float('inf') for DIEM; 300 for DHF1K
 Val_Max_TrainFrame = 1000                # 1000 for DIEM; 300 for DHF1K
 
 ################################################################

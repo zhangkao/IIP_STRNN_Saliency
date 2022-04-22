@@ -97,7 +97,7 @@ And it is easy to change the output format in our code.
 * You can evaluate the performance based on the "EvalScores Tools".
 
 
-**Results**: [ALL](https://whueducn-my.sharepoint.com/:f:/g/personal/zhangkao_whu_edu_cn/Es2k8IqwSOBMs0jpKxDG8V4Bx49k3IP_r_B6ceRqgU16FQ?e=lzmwT3) (5.1G);
+**Results**: [ALL](https://whueducn-my.sharepoint.com/:f:/g/personal/zhangkao_whu_edu_cn/Es2k8IqwSOBMs0jpKxDG8V4Bx49k3IP_r_B6ceRqgU16FQ?e=lzmwT3) (6.2G);
 [DIEM20](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/EeLxb5aqHg9DobSBDi2jizYBNw02Y-W-8eaUIPIkIvCcwg?e=7aW359) (261M),
 [CITIUS-R](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/Eaak96t4PH1KvGWRDHmwft8By9yQTL-TgUt1DyZ7GuJP4w?e=O11DeY) (54M), 
 [LEDOV41](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/EUcrQQuut2FIuLDwnHv4K9MB0Ut-_NFWlHVaayCoeiKnDA?e=cRtyZv) (839M), 
@@ -108,10 +108,14 @@ And it is easy to change the output format in our code.
 
 **Results for DHF1K**: 
 
-* **strnn_res_dhf1k_test_rt** : 
+* **strnn_res_dhf1k_test** : 
 [OneDrive](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/EWb98WMO7bZGt-bq9AOnkM4BEWsC7_cm4gEuYDCrJnk22Q?e=J7havj); 
 [Google Drive](https://drive.google.com/file/d/1mfV5WXkPECLDfMvBoRoaCV6GYluyBzmW). 
 (3.94G)<br />
+
+* **strnn_res_dhf1k_val** : 
+[OneDrive](https://whueducn-my.sharepoint.com/:u:/g/personal/zhangkao_whu_edu_cn/ESD48TTUxHhDkzF-XxvgDgcBfQ5-IbZk9RRdHWOFUVE6MA?e=gGghd6); 
+(1.08G)<br />
 We use the first 300 frames of each video from the DHF1K training set to retrain the model and generate the new results.
 
 
